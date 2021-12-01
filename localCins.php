@@ -5,106 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <title>Geodud</title>
+  <title>Local Theaters</title>
 </head>
 <body>
   <div class="container" >
-    <h2 id="text-center"> Location: </h2>
+    <h2 id="text-center"> Movie theaters: </h2>
   </div>
-  <form action="" method="post">
-    <input type='text' name='address'/>
-    <input type='submit' value='submit' />
-</form>
-  <input type = "button" onclick = "location.href='localCins.php'" value = "cinima" />
-  <?php 
-  $address = $_POST['address'];
-function geocode($address){
   
-    $address = urlencode($address);
-      
-    $url = "https://maps.googleapis.com/maps/api/geocode/json?address={$address}&key=AIzaSyBWrn0_cBtbWJ35omI8UcYPD5cj7QfQyiQ";
-  
-    $resp_json = file_get_contents($url);
-      
-
-    $resp = json_decode($resp_json, true);
-  
-    if($resp['status']=='OK'){
-  
-        $lati = isset($resp['results'][0]['geometry']['location']['lat']) ? $resp['results'][0]['geometry']['location']['lat'] : "";
-        $longi = isset($resp['results'][0]['geometry']['location']['lng']) ? $resp['results'][0]['geometry']['location']['lng'] : "";
-        $formatted_address = isset($resp['results'][0]['formatted_address']) ? $resp['results'][0]['formatted_address'] : "";
-          
-        if($lati && $longi && $formatted_address){
-          
-            $data_arr = array();            
-              
-            array_push(
-                $data_arr, 
-                    $lati, 
-                    $longi, 
-                    $formatted_address
-                );
-              
-            return $data_arr;
-              
-        }else{
-            return false;
-        }
-          
-    }
-  
-    else{
-        echo "<strong>ERROR: {$resp['status']}</strong>";
-        return false;
-    }
-}
-?>
-
 <?php
-if($_POST){
-  
 
-    $data_arr = geocode($_POST['address']);
-  
 
-    if($data_arr){
-          
-        $lati = $data_arr[0];
-        $long = $data_arr[1];
-    $geo =   $lati . ";". $long;           
-    
-   }else{
-        echo "No map found.";   }
-
-}
 require_once('dbConnect.php');
-            
 $conn = db_connect();
- 
-
- if (!$conn) {
-     die("Connection failed: " . mysqli_connect_error());
- }
- 
- 
-
- 
- $sql = "INSERT INTO geocode (geocode, address)";
- $sql .= " VALUES   ( ";  
- $sql .= "'" . $geo . "','". $formatted_address."'); "; 
-
- $result1 = mysqli_query($conn,$sql);
-
-
-
-     mysqli_free_result($result1,$result3);
- 
-
-
- db_close($conn);  
-
- $conn = db_connect();
  
 
  if (!$conn) {
@@ -125,9 +37,10 @@ $basic_authorization = '		Basic Uk9XQV81X1hYOnZFbkFjTGtJcHB3cA=='; // Example: $
 $territory = 'XX'; // Territory chosen as part of your evaluation key request  (Options: UK, FR, ES, DE, US, CA, IE, IN)
 $api_version = 'v200'; // API Version for evaluation - check documentation for later versions
 $device_datetime = (new DateTime())->format('Y-m-d H:i:s'); // Current device date/time 
-$geolocation = '-22.0;14.0'; 
+$geolocation = '-22.0;14.0'; // Device Geolocation. Note semicolon (;) used as separator. IMPORTANT: This MUST be a location in the territory you selected above. The sample location is set at: Leicester Square, London, UK
 
 
+// Initialize a cURL session
 $ch = curl_init();
 
 // Assign cURL Settings
@@ -200,10 +113,5 @@ while($x < $i){
     echo "fail";
       exit();
   }?>
-
-?>
-
-
 </body>
-
 </html>
