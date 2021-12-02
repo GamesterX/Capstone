@@ -14,7 +14,7 @@
   
 <?php
 
-
+function localcins(){
 require_once('dbConnect.php');
 $conn = db_connect();
  
@@ -112,6 +112,8 @@ while($x < $i){
   }else{
     echo "fail";
       exit();
+  }
+  
   }?>
 </body>
 </html>

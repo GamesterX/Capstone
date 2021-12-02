@@ -8,14 +8,7 @@
   <title>Geodud</title>
 </head>
 <body>
-  <div class="container" >
-    <h2 id="text-center"> Location: </h2>
-  </div>
-  <form action="" method="post">
-    <input type='text' name='address'/>
-    <input type='submit' value='submit' />
-</form>
-  <input type = "button" onclick = "location.href='localCins.php'" value = "cinima" />
+
   <?php 
   $address = $_POST['address'];
 function geocode($address){
@@ -103,103 +96,8 @@ $conn = db_connect();
 
 
  db_close($conn);  
-
- $conn = db_connect();
- 
-
- if (!$conn) {
-     die("Connection failed: " . mysqli_connect_error());
- }
- $sql3 = "SELECT geocode FROM geocode ORDER BY id DESC LIMIT 1";
- 
- 
-$result3 = mysqli_query($conn,$sql3);
-$contact = mysqli_fetch_array($result3);
-
-$api = 'cinemasNearby/?n=5';
-
-$api_endpoint = 'https://api-gate2.movieglu.com/';
-$username = 'ROWA_5'; // Example: $username = 'ABCD';
-$api_key = 'n6moBcaOD279KBDn7en2PsTWCPjNJBh5IrqonzUh';  //Example: $api_key = 'AbCdEFG7CuTTc6KX76mI5aAoGtqbrGW2ga6B4jRg';
-$basic_authorization = '		Basic Uk9XQV81X1hYOnZFbkFjTGtJcHB3cA=='; // Example: $basic_authorization = 'Basic UHSYGF4xNTpNOHdJQllxckYyN3y=';
-$territory = 'XX'; // Territory chosen as part of your evaluation key request  (Options: UK, FR, ES, DE, US, CA, IE, IN)
-$api_version = 'v200'; // API Version for evaluation - check documentation for later versions
-$device_datetime = (new DateTime())->format('Y-m-d H:i:s'); // Current device date/time 
-$geolocation = '-22.0;14.0'; 
-
-
-$ch = curl_init();
-
-// Assign cURL Settings
-curl_setopt($ch, CURLOPT_URL, $api_endpoint . $api);
-curl_setopt($ch, CURLOPT_HEADER, 1);
-curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-curl_setopt($ch, CURLOPT_HTTPHEADER, [
-  'Authorization: ' . $basic_authorization, 
-  'client: ' . $username,
-  'x-api-key: ' . $api_key,  
-  'territory: ' . $territory,
-  'api-version: ' .$api_version,
-  'device-datetime: ' . $device_datetime,
-  'geolocation: ' .$geolocation 
- ]
-);
-
-
-$ret = curl_exec($ch);
-
-
-$http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
-$header_size = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
-
-$body = substr($ret, $header_size);
-
-curl_close($ch);
-
-
-$response = json_decode($body, true);
-for($i = 0;$i<3; $i++){
-
-$cinema_name[$i] =  $response['cinemas'][$i]['cinema_name'];
-$address[$i] =  $response['cinemas'][$i]['address'];
-$city[$i] =  $response['cinemas'][$i]['city'];
-$cinema_id[$i] = $response['cinemas'][$i]['cinema_id'];
-$fullAddress[$i] = $address[$i] . ", " . $city[$i];
-}
-
-$conn = db_connect();
- 
-
- if (!$conn) {
-     die("Connection failed: " . mysqli_connect_error());
- }
-
-
-
-
-$x = 0;
-  if($http_code == 200){
-      echo "<ol>";
-while($x < $i){
-      echo "<li>" . $cinema_id[$x] . ": ". $cinema_name[$x] . ", ". $address[$x] .", " . $city[$x] . "</li>";
-      
-      $sql3 = "INSERT INTO LocalCins (cin_id, name, address) value ('".$cinema_id[$x]. "', '".$cinema_name[$x]."', '".$fullAddress[$x]. "')";
-      
-      $result3 = mysqli_query($conn,$sql3);
-      mysqli_free_result($result3);
-    $x++;
-    }
-    mysqli_close($conn);
-    echo"</ol>";
-  }elseif($http_code == 204){
-      echo 'No results for request';
-      echo "<pre>" . json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) . "</pre>";
-  }else{
-    echo "fail";
-      exit();
-  }?>
+require('localCins.php');
+localcins()
 
 ?>
 
