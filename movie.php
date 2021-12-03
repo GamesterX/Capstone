@@ -8,7 +8,7 @@
 </head>
 <body>
     <?php
-    $x = $_POST['search'];
+    $x = $_POST['movies'];
     require_once('dbConnect.php');
             
     $conn = db_connect();
@@ -31,10 +31,10 @@
 db_close($conn);
     echo '
 <h1><a href="file:///C:\Programs\Home.html"><strong>Home</strong></a></h1>
-<h1>'. $title . '</h1>
-<p>Release Date:'.$release.'</p>
-<p>Length:'. $length .'</p>
-<p>Popularity:'. $pop .'</p>
+<h1> '. $title . ' </h1>
+<p>Release Date: '.$release.'</p>
+<p>Length: '. $length .'</p>
+<p>Popularity: '. $pop .'</p>
 <p>Synopsis:</p>
 <p>TMDB ID:<a href="http://www.themoviedb.org/movie/'.$id.'-the-movie-3">'.$id.'</a></p>
 <p>IMDB ID:<a href="http://www.imdb.com/title/tt13544716/">tt13544716 </a></p>';

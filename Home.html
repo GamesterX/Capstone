@@ -14,10 +14,22 @@
   <!--2nd header, names-->
   <h2>Created by Nick Eggert, Terrance Graves, Raymond Jaconski, and Samuel Jolade</h2>
   <!--instructions-->
-  <h3>Enter a Movie Title in the Search Box</h3>
+  <h3>Choose a Movie Title in or search for a Cinima Nearby</h3>
   <!--search box, need to change routes to get proper data-->
   <form action = "movie.php" method ="post">
-  	<input type="text" name ="search">
+  	<label for="movies">Movies Now Playing:</label>
+
+<select name="movies" id="movies">
+  
+  <option value="Clifford the Big Red Dog">Clifford the Big Red Dog</option>
+  <option value="Dune">Dune</option>
+  <option value="Eternals">Eternals</option>
+  <option value="Last Night in Soho">Last Night in Soho</option>
+  <option value="My Hero Academia: World Heroes Mission">My Hero Academia: World Heroes Mission</option>
+  <option value="Spencer">Spencer</option>
+  
+  <option value="Venom: Let There Be Carnage">Venom: Let There Be Carnage</option>
+</select>
   	<input type = "submit">
   </form>
   <form action="geocode.php" method="post">
