@@ -1,8 +1,4 @@
-<!-- file: credentials php
- by: Ray Jaconski
-date: 7/13/21
-class: INTRO TO WEB DEVELOPMENT - 1
- purpose: <Description of the Class -->
+<!-- mysql loggin information-->
 
     <?php
              define( "host", "sql5.freemysqlhosting.net");
