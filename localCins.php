@@ -31,13 +31,13 @@ $contact = mysqli_fetch_array($result3);
 $api = 'cinemasNearby/?n=5';
 
 $api_endpoint = 'https://api-gate2.movieglu.com/';
-$username = 'ROWA_5'; // Example: $username = 'ABCD';
-$api_key = 'n6moBcaOD279KBDn7en2PsTWCPjNJBh5IrqonzUh';  //Example: $api_key = 'AbCdEFG7CuTTc6KX76mI5aAoGtqbrGW2ga6B4jRg';
-$basic_authorization = '		Basic Uk9XQV81X1hYOnZFbkFjTGtJcHB3cA=='; // Example: $basic_authorization = 'Basic UHSYGF4xNTpNOHdJQllxckYyN3y=';
-$territory = 'XX'; // Territory chosen as part of your evaluation key request  (Options: UK, FR, ES, DE, US, CA, IE, IN)
+$username = 'ROWA_7'; // Example: $username = 'ABCD';
+$api_key = 'RQUIGsYt5R3sM97H17ols9zxOgDi5Hxp97BDk2nj';  //Example: $api_key = 'AbCdEFG7CuTTc6KX76mI5aAoGtqbrGW2ga6B4jRg';
+$basic_authorization = ' Basic UK9XQV83OCUINVbkhYTFhYVA=='; // Example: $basic_authorization = 'Basic UHSYGF4xNTpNOHdJQllxckYyN3y=';
+$territory = 'US'; // Territory chosen as part of your evaluation key request  (Options: UK, FR, ES, DE, US, CA, IE, IN)
 $api_version = 'v200'; // API Version for evaluation - check documentation for later versions
 $device_datetime = (new DateTime())->format('Y-m-d H:i:s'); // Current device date/time 
-$geolocation = '-22.0;14.0'; // Device Geolocation. Note semicolon (;) used as separator. IMPORTANT: This MUST be a location in the territory you selected above. The sample location is set at: Leicester Square, London, UK
+$geolocation = $contact[0]; // Device Geolocation. Note semicolon (;) used as separator. IMPORTANT: This MUST be a location in the territory you selected above. The sample location is set at: Leicester Square, London, UK
 
 
 // Initialize a cURL session
