@@ -1,3 +1,5 @@
+<!--movieglu api used to find local theaters using geocode paased in through 
+database extraction-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +11,7 @@
 </head>
 <body>
   <div class="container" >
-    <h2 id="text-center"> Movie theaters: </h2>
+    <h2 id="text-center"> Movie theaters near by: </h2>
   </div>
   
 <?php
@@ -40,7 +42,6 @@ $device_datetime = (new DateTime())->format('Y-m-d H:i:s'); // Current device da
 $geolocation = $contact[0]; // Device Geolocation. Note semicolon (;) used as separator. IMPORTANT: This MUST be a location in the territory you selected above. The sample location is set at: Leicester Square, London, UK
 
 
-// Initialize a cURL session
 $ch = curl_init();
 
 // Assign cURL Settings
