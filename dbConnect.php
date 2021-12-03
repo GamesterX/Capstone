@@ -1,8 +1,4 @@
-<!-- file: dbconnect
- by: Ray Jaconski
-date: 7/12/21
-class: INTRO TO WEB DEVELOPMENT - 1
- purpose: <Description of the Class -->
+<!-- mysql connection and closing commands, credentials is passed in-->
 <?php
 require_once('credentials.php');
 
