@@ -89,12 +89,8 @@ $conn = db_connect();
 
  $result1 = mysqli_query($conn,$sql);
 
-
-
      mysqli_free_result($result1,$result3);
  
-
-
  db_close($conn);  
 require('localCins.php');
 localcins()
